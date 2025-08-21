@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七七福 - 宠物鲜粮专家 | 高温高压杀菌，天然健康更安心</title>
+    <meta name="description" content="七七福宠物鲜粮，采用高温高压杀菌工艺，精选天然食材，科学配比，彻底杀灭有害菌，为您的爱宠提供安全健康的每日膳食。">
+    <meta name="keywords" content="七七福, 宠物鲜粮, 高温高压杀菌宠物粮, 天然宠物食品, 狗狗鲜粮, 猫咪鲜粮">
+    <meta name="author" content="七七福宠物食品有限公司">
+    <link rel="canonical" href="https://www.77fu.com/">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="七七福 - 宠物鲜粮专家">
+    <meta property="og:description" content="高温高压杀菌工艺，天然食材，科学配比，为您的爱宠提供安全健康的每日膳食">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.77fu.com/">
+    <meta property="og:image" content="https://picsum.photos/id/1025/800/600">
+    
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4CAF50', // 主色调：绿色，代表健康、天然
+                        secondary: '#FF9800', // 辅助色：橙色，代表活力、友好
+                        neutral: {
+                            100: '#F5F7FA',
+                            200: '#E4E7ED',
+                            300: '#C0C4CC',
+                            400: '#909399',
+                            500: '#606266',
+                            600: '#303133',
+                            700: '#1E1E1E',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    </style>
+    
+    <style>
+        /* 基础样式 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .product-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+        
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 加载字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="font-sans text-neutral-600 bg-neutral-100">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- 品牌标识 -->
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-primary text-3xl"><i class="fa fa-paw"></i></span>
+                    <span class="text-2xl font-bold text-neutral-700">七七福</span>
+                </a>
+                
+                <!-- 桌面导航 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-neutral-600 hover:text-primary transition-custom font-medium">关于我们</a>
+                    <a href="#products" class="text-neutral-600 hover:text-primary transition-custom font-medium">产品系列</a>
+                    <a href="#advantages" class="text-neutral-600 hover:text-primary transition-custom font-medium">产品优势</a>
+                    <a href="#testimonials" class="text-neutral-600 hover:text-primary transition-custom font-medium">客户评价</a>
+                    <a href="#faq" class="text-neutral-600 hover:text-primary transition-custom font-medium">常见问题</a>
+                    <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full transition-custom font-medium shadow-md hover:shadow-lg">立即购买</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-neutral-700 focus:outline-none">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-neutral-200">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#about" class="block text-neutral-600 hover:text-primary transition-custom py-2">关于我们</a>
+                <a href="#products" class="block text-neutral-600 hover:text-primary transition-custom py-2">产品系列</a>
+                <a href="#advantages" class="block text-neutral-600 hover:text-primary transition-custom py-2">产品优势</a>
+                <a href="#testimonials" class="block text-neutral-600 hover:text-primary transition-custom py-2">客户评价</a>
+                <a href="#faq" class="block text-neutral-600 hover:text-primary transition-custom py-2">常见问题</a>
+                <a href="#contact" class="block bg-primary text-white px-6 py-3 rounded-full text-center transition-custom shadow-md">立即购买</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8 animate-fade-in" style="animation-delay: 0.1s">
+                        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-neutral-700 leading-tight mb-6">
+                            给爱宠 <span class="text-primary">安全健康</span> 的<br>每日营养
+                        </h1>
+                        <p class="text-lg text-neutral-500 mb-8 max-w-lg">
+                            七七福宠物鲜粮，精选天然食材，<span class="font-semibold text-primary">高温高压杀菌工艺</span>锁鲜，彻底杀灭有害菌，让您的爱宠吃得安心，活力满满。
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#products" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-center transition-custom font-semibold shadow-lg hover:shadow-xl text-lg">
+                                探索产品
+                            </a>
+                            <a href="#about" class="border-2 border-primary text-primary hover:bg-primary/5 px-8 py-4 rounded-full text-center transition-custom font-semibold text-lg">
+                                了解更多
+                            </a>
+                        </div>
+                        <div class="mt-10 flex items-center space-x-6">
+                            <div class="flex -space-x-2">
+                                <img src="https://picsum.photos/id/237/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                <img src="https://picsum.photos/id/1025/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                <img src="https://picsum.photos/id/1062/100/100" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary border-2 border-white flex items-center justify-center text-sm font-bold">
+                                    500+
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center text-yellow-400 mb-1">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                    <span class="ml-2 text-neutral-600 font-medium">4.8/5</span>
+                                </div>
+                                <p class="text-sm text-neutral-500">来自5000+宠物主人的好评</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 animate-fade-in" style="animation-delay: 0.3s">
+                        <div class="relative">
+                            <img src="https://picsum.photos/id/1025/800/600" alt="狗狗享用七七福鲜粮" class="w-full h-auto rounded-2xl shadow-2xl">
+                            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg max-w-[200px]">
+                                <div class="flex items-center mb-2">
+                                    <i class="fa fa-check-circle text-primary mr-2"></i>
+                                    <span class="font-semibold text-neutral-700">100% 天然食材</span>
+                                </div>
+                                <p class="text-sm text-neutral-500">无添加防腐剂、人工色素和香料</p>
+                            </div>
+                            <div class="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg max-w-[180px]">
+                                <div class="flex items-center mb-2">
+                                    <i class="fa fa-shield text-primary mr-2"></i>
+                                    <span class="font-semibold text-neutral-700">高温杀菌</span>
+                                </div>
+                                <p class="text-sm text-neutral-500">彻底杀灭有害菌，食用更安心</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 品牌信任 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-neutral-400 mb-8">受到众多宠物机构的信赖</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+                    <div class="h-8 md:h-10 flex items-center">
+                        <span class="text-neutral-500 font-bold text-xl">宠物协会</span>
+                    </div>
+                    <div class="h-8 md:h-10 flex items-center">
+                        <span class="text-neutral-500 font-bold text-xl">爱宠医院</span>
+                    </div>
+                    <div class="h-8 md:h-10 flex items-center">
+                        <span class="text-neutral-500 font-bold text-xl">宠物之家</span>
+                    </div>
+                    <div class="h-8 md:h-10 flex items-center">
+                        <span class="text-neutral-500 font-bold text-xl">萌宠乐园</span>
+                    </div>
+                    <div class="h-8 md:h-10 flex items-center">
+                        <span class="text-neutral-500 font-bold text-xl">宠物资讯</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我们 -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">关于七七福</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">我们以<span class="font-semibold text-primary">“安全第一”</span>为核心，采用高温高压杀菌工艺，为宠物提供天然、安全的鲜粮选择。</p>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="relative">
+                            <img src="https://picsum.photos/id/40/600/700" alt="七七福团队与宠物" class="w-full h-auto rounded-2xl shadow-xl">
+                            <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-xl shadow-lg max-w-[250px]">
+                                <p class="text-3xl font-bold mb-2">5+</p>
+                                <p class="text-white/90">专注宠物营养研究的经验</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <h3 class="text-2xl font-bold text-neutral-700 mb-6">我们的故事</h3>
+                        <p class="text-neutral-500 mb-6 leading-relaxed">
+                            七七福源于对宠物的热爱。创始人李女士因为自己的爱犬健康问题，开始关注宠物食品的安全性和营养价值。
+                            经过多年研究和实践，她发现<span class="font-medium">“食材天然+工艺安全”</span>是宠物健康饮食的核心，最终选定高温高压杀菌工艺作为核心技术。
+                        </p>
+                        <p class="text-neutral-500 mb-8 leading-relaxed">
+                            2018年，七七福正式成立，我们汇集了宠物营养学专家、兽医和食品研发人员，
+                            致力于为宠物提供最科学、最安全的鲜粮解决方案。每一款产品都经过严格的研发和杀菌测试，
+                            确保为宠物提供“无有害菌、营养均衡”的健康膳食。
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                    <i class="fa fa-heart text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-700 mb-2">用心对待</h4>
+                                    <p class="text-sm text-neutral-500">像对待家人一样对待每一位毛孩子</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                    <i class="fa fa-shield text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-700 mb-2">安全第一</h4>
+                                    <p class="text-sm text-neutral-500">严格把控食材来源和杀菌过程</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                    <i class="fa fa-flask text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-700 mb-2">科学配方</h4>
+                                    <p class="text-sm text-neutral-500">由宠物营养专家精心研发</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                    <i class="fa fa-truck text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-neutral-700 mb-2">新鲜配送</h4>
+                                    <p class="text-sm text-neutral-500">全程冷链，确保新鲜送达</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-custom">
+                            了解更多我们的故事
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 产品系列 -->
+        <section id="products" class="py-20 bg-neutral-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">我们的产品系列</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">所有产品均采用高温高压杀菌工艺，针对不同宠物、不同年龄段和需求，提供安全健康的营养选择。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 产品1 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/237/600/400" alt="七七福幼犬鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
+                                热销
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">幼犬活力鲜粮</h3>
+                                <span class="text-primary font-bold">¥68<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">专为3-12个月幼犬设计，高温杀菌更安全，高蛋白配方，促进生长发育，增强免疫力。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">高蛋白</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">易消化</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">钙磷均衡</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品2 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/1062/600/400" alt="七七福成犬鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-secondary text-white text-sm font-semibold px-3 py-1 rounded-full">
+                                新品
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">成犬全能鲜粮</h3>
+                                <span class="text-primary font-bold">¥58<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">为1-7岁成年犬定制，高温杀菌工艺，均衡营养配方，维持理想体重，保持活力。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">均衡营养</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">护关节</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">美毛</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品3 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/1074/600/400" alt="七七福幼猫鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">幼猫成长鲜粮</h3>
+                                <span class="text-primary font-bold">¥72<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">适合1-12个月幼猫，高温杀菌更安心，高能量配方，促进大脑发育，呵护泌尿系统。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">高能量</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">护泌尿</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">促发育</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品4 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/40/600/400" alt="七七福成猫鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">成猫健康鲜粮</h3>
+                                <span class="text-primary font-bold">¥65<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">为1-8岁成年猫设计，高温杀菌工艺，控制毛球生成，维护肠道健康，增强免疫力。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">控毛球</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">护肠道</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">增免疫</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品5 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/1025/600/400" alt="七七福老年犬鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">老年犬呵护鲜粮</h3>
+                                <span class="text-primary font-bold">¥62<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">专为8岁以上老年犬定制，高温杀菌更安全，低负担配方，保护心脏，延缓衰老。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">低负担</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">护心脏</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">延缓衰老</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品6 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://picsum.photos/id/582/600/400" alt="七七福处方鲜粮" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-neutral-700">处方调理鲜粮</h3>
+                                <span class="text-primary font-bold">¥88<span class="text-sm text-neutral-500 font-normal">/500g</span></span>
+                            </div>
+                            <p class="text-neutral-500 mb-6">针对肠胃敏感、皮肤问题等特殊需求宠物，高温杀菌工艺，定制调理配方更安心。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">肠胃调理</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">皮肤护理</span>
+                                <span class="bg-neutral-100 text-neutral-600 text-xs px-3 py-1 rounded-full">低敏</span>
+                            </div>
+                            <a href="#contact" class="block w-full bg-primary/10 hover:bg-primary/20 text-primary text-center py-3 rounded-lg transition-custom font-medium">
+                                立即购买
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#contact" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full transition-custom font-semibold shadow-md hover:shadow-lg">
+                        查看全部产品
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 产品优势 -->
+        <section id="advantages" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">为什么选择七七福</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">我们坚持以宠物健康为核心，采用高温高压杀菌工艺，从食材选择到生产配送，每一步都严格把控。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 优势1 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-leaf text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">天然食材</h3>
+                        <p class="text-neutral-500">精选人类可食用级别的新鲜肉类和有机蔬果，不添加任何防腐剂、人工色素和香料，为爱宠提供纯净营养。</p>
+                    </div>
+                    
+                    <!-- 优势2 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-flask text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">科学配方</h3>
+                        <p class="text-neutral-500">由专业宠物营养师和兽医团队研发，根据不同品种、年龄和健康状况定制配方，满足爱宠的个性化需求。</p>
+                    </div>
+                    
+                    <!-- 优势3 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-fire text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">高温高压杀菌</h3>
+                        <p class="text-neutral-500">采用先进的高温高压杀菌工艺，能彻底杀灭食材中的细菌、病毒和寄生虫卵，同时最大程度保留营养成分。</p>
+                    </div>
+                    
+                    <!-- 优势4 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-calendar-check-o text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">新鲜现做</h3>
+                        <p class="text-neutral-500">接到订单后新鲜制作，72小时内完成生产和配送，确保您的爱宠吃到最新鲜的食物，无需依赖防腐剂。</p>
+                    </div>
+                    
+                    <!-- 优势5 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-truck text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">冷链配送</h3>
+                        <p class="text-neutral-500">全程冷链运输，专业保鲜包装，确保产品从生产到送达始终保持最佳新鲜度和安全性。</p>
+                    </div>
+                    
+                    <!-- 优势6 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl hover:shadow-lg transition-custom group">
+                        <div class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-custom">
+                            <i class="fa fa-certificate text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-700 mb-4">安全认证</h3>
+                        <p class="text-neutral-500">通过国家宠物食品安全生产认证，每批次产品均经过严格检测，确保食品安全可追溯，食用更放心。</p>
+                    </div>
+                </div>
+                
+                <!-- 数据统计 -->
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-6">
+                        <p class="text-4xl font-bold text-primary mb-2">50000+</p>
+                        <p class="text-neutral-500">满意客户</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-4xl font-bold text-primary mb-2">100000+</p>
+                        <p class="text-neutral-500">宠物在用</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-4xl font-bold text-primary mb-2">98%</p>
+                        <p class="text-neutral-500">好评率</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-4xl font-bold text-primary mb-2">12+</p>
+                        <p class="text-neutral-500">产品系列</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 制作过程 -->
+        <section class="py-20 bg-neutral-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">我们的制作过程</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">从食材到成品，每一步都严格把控，特别是采用高温高压杀菌工艺，确保为您的爱宠提供最安全的鲜粮。</p>
+                </div>
+                
+                <div class="relative">
+                    <!-- 连接线 -->
+                    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 transform -translate-x-1/2"></div>
+                    
+                    <div class="space-y-12 md:space-y-0 relative">
+                        <!-- 步骤1 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">精选优质食材</h3>
+                                <p class="text-neutral-500">我们严格筛选每一种食材，只选用新鲜、天然、无添加的肉类和蔬果，确保食材的高品质和安全性。</p>
+                            </div>
+                            <div class="md:w-12 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">1</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <img src="https://picsum.photos/id/488/600/400" alt="精选食材" class="rounded-xl shadow-md w-full h-auto">
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤2 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 order-1 md:order-1 mb-6 md:mb-0 md:text-right">
+                                <img src="https://picsum.photos/id/292/600/400" alt="食材处理" class="rounded-xl shadow-md w-full h-auto md:ml-auto">
+                            </div>
+                            <div class="md:w-12 flex justify-center order-0 md:order-2">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">2</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12 order-2 md:order-3">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">精细处理</h3>
+                                <p class="text-neutral-500">对食材进行严格清洗、去皮、去骨等处理，确保食材纯净无污染，同时保留最大营养价值。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤3 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">科学配比</h3>
+                                <p class="text-neutral-500">根据不同宠物的营养需求，按精确比例混合各种食材，确保营养均衡全面。</p>
+                            </div>
+                            <div class="md:w-12 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">3</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <img src="https://picsum.photos/id/493/600/400" alt="科学配比" class="rounded-xl shadow-md w-full h-auto">
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤4 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 order-1 md:order-1 mb-6 md:mb-0 md:text-right">
+                                <img src="https://picsum.photos/id/42/600/400" alt="高温高压杀菌" class="rounded-xl shadow-md w-full h-auto md:ml-auto">
+                            </div>
+                            <div class="md:w-12 flex justify-center order-0 md:order-2">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">4</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12 order-2 md:order-3">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">高温高压杀菌</h3>
+                                <p class="text-neutral-500">采用121℃高温和高压环境进行杀菌处理，能彻底杀灭食材中的细菌、病毒和寄生虫卵，同时通过精准控制时间和压力，最大限度保留食材营养。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤5 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">无菌包装</h3>
+                                <p class="text-neutral-500">在无菌环境下进行分装和密封，使用环保、安全的包装材料，确保产品新鲜卫生，防止二次污染。</p>
+                            </div>
+                            <div class="md:w-12 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">5</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <img src="https://picsum.photos/id/365/600/400" alt="无菌包装" class="rounded-xl shadow-md w-full h-auto">
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤6 -->
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-12 order-1 md:order-1 mb-6 md:mb-0 md:text-right">
+                                <img src="https://picsum.photos/id/133/600/400" alt="冷链配送" class="rounded-xl shadow-md w-full h-auto md:ml-auto">
+                            </div>
+                            <div class="md:w-12 flex justify-center order-0 md:order-2">
+                                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold relative z-10">6</div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12 order-2 md:order-3">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-3">冷链配送</h3>
+                                <p class="text-neutral-500">通过专业冷链物流配送，全程保持低温环境，确保产品新鲜送达您的手中，延长保质期。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 客户评价 -->
+        <section id="testimonials" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">宠物主人的真实评价</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">来自全国各地宠物主人的真实反馈，见证七七福高温杀菌鲜粮给爱宠带来的健康改变。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 评价1 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "我家金毛之前吃普通鲜粮偶尔会软便，换了七七福的高温杀菌鲜粮后，肠胃明显改善，再也没有出现过消化问题，真的很放心！"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/64/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">张先生</h4>
+                                <p class="text-sm text-neutral-500">金毛主人 · 上海</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评价2 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "作为一个谨慎的宠物主人，我非常看重食品安全。七七福的高温高压杀菌工艺让我很放心，猫咪吃了半年多，身体一直很健康。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/65/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">李女士</h4>
+                                <p class="text-sm text-neutral-500">布偶猫主人 · 北京</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评价3 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "我家泰迪年纪大了，免疫力下降，医生建议注意饮食卫生。换了七七福的高温杀菌鲜粮后，明显感觉狗狗体质变好了，很少生病了。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/91/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">王女士</h4>
+                                <p class="text-sm text-neutral-500">泰迪主人 · 广州</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评价4 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "领养的流浪猫之前有寄生虫问题，医生特别嘱咐要吃经过严格杀菌的食物。七七福的高温杀菌鲜粮很符合要求，现在猫咪很健康活泼。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/22/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">赵先生</h4>
+                                <p class="text-sm text-neutral-500">英短猫主人 · 成都</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评价5 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "对比了很多品牌，最终选择七七福是因为他们的高温高压杀菌工艺。作为多猫家庭，食品安全太重要了，这款鲜粮让我家所有猫咪都很适应。"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/29/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">陈女士</h4>
+                                <p class="text-sm text-neutral-500">多猫家庭 · 杭州</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评价6 -->
+                    <div class="bg-neutral-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-custom">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <p class="text-neutral-600 mb-6 italic">
+                            "我家狗狗肠胃敏感，之前吃很多食物都会不适。七七福的高温杀菌鲜粮不仅安全，而且配方温和，狗狗吃了很适应，推荐给同样有困扰的主人！"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/id/33/100/100" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-neutral-700">刘先生</h4>
+                                <p class="text-sm text-neutral-500">萨摩耶主人 · 深圳</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section id="faq" class="py-20 bg-neutral-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">常见问题</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">我们收集了宠物主人最常问的问题，特别是关于高温高压杀菌工艺的相关疑问，如有其他问题欢迎联系我们。</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-6">
+                        <!-- 问题1 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">高温高压杀菌会破坏食材的营养成分吗？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    不会。七七福采用的是精准控制的高温高压杀菌工艺，在121℃的高温和特定压力下，仅需短时间（通常3-5分钟）即可完成杀菌。这种精准控制的工艺既能彻底杀灭有害微生物，又能最大限度保留食材中的蛋白质、维生素和矿物质等营养成分。相比传统长时间高温处理，我们的工艺能更好地平衡安全性和营养保留。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 问题2 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">高温高压杀菌与普通杀菌有什么区别？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    主要区别在于杀菌效果和对食材的影响：1）杀菌效果：高温高压能杀灭普通杀菌无法消除的细菌芽孢、寄生虫卵等顽固有害物；2）时间更短：高温高压环境下杀菌时间更短，减少营养流失；3）更安全：无需依赖防腐剂即可达到商业无菌状态；4）口感更好：短时间处理能更好地保持食材的天然口感和风味。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 问题3 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">七七福鲜粮的保质期是多久？如何保存？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    得益于高温高压杀菌工艺，七七福鲜粮在未开封情况下，冷藏（0-4℃）可保存21天，比普通鲜粮更长。冷冻（-18℃）可保存120天。开封后需冷藏并在48小时内食用完毕。建议收到产品后立即放入冰箱冷藏或冷冻保存，食用前无需加热，直接喂食即可（冬季可稍作温置至室温）。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 问题4 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">高温杀菌后的鲜粮会不会口感不好？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    不会。七七福的研发团队经过上千次试验，优化了高温高压的参数和时间，确保在杀菌的同时最大限度保留食材的天然口感和风味。我们的产品采用新鲜食材，不添加人工调味剂，高温处理后依然能保持食材本身的鲜香，绝大多数宠物都非常喜爱。如果您的宠物初次接触，可能需要1-2天适应期。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 问题5 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">哪些地区可以配送？配送需要多长时间？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    目前七七福鲜粮已覆盖全国大部分城市（除偏远地区）。我们采用顺丰冷链配送，下单后48小时内完成生产并发货，具体送达时间取决于您所在的地区，一般1-3天可送达。我们会在订单确认后提供预计送达时间，并实时跟踪物流信息。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 问题6 -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="font-semibold text-lg text-neutral-700">如果宠物不爱吃，可以退换吗？</span>
+                                <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-neutral-500">
+                                    我们提供"7天无理由退换"服务，但由于鲜粮的特殊性，退换需满足以下条件：1）产品未开封，保持原包装完好；2）仍在保质期内；3）冷藏保存完好。如宠物确实不爱吃，建议先联系客服，我们的营养师会提供喂食建议，尽量帮助宠物适应新食物。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <p class="text-neutral-500 mb-4">还有其他问题？</p>
+                        <a href="#contact" class="inline-block bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-full transition-custom font-medium">
+                            联系我们获取帮助
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我们 -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-700 mb-4">联系我们</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-neutral-500">无论您有任何疑问、建议或合作意向，都欢迎与我们联系，我们会尽快回复您。</p>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="lg:w-1/2">
+                        <form class="bg-neutral-50 p-8 rounded-2xl">
+                            <div class="mb-6">
+                                <label for="name" class="block text-neutral-700 font-medium mb-2">您的姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的姓名">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="phone" class="block text-neutral-700 font-medium mb-2">联系电话</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的联系电话">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="email" class="block text-neutral-700 font-medium mb-2">电子邮箱</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的电子邮箱">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="pet" class="block text-neutral-700 font-medium mb-2">您的宠物</label>
+                                <select id="pet" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom">
+                                    <option value="">请选择宠物类型</option>
+                                    <option value="dog">狗狗</option>
+                                    <option value="cat">猫咪</option>
+                                    <option value="other">其他宠物</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-neutral-700 font-medium mb-2">留言内容</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的留言内容，如对高温杀菌工艺有任何疑问，欢迎咨询"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg transition-custom font-semibold shadow-md hover:shadow-lg">
+                                提交留言
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="lg:w-1/2">
+                        <div class="h-full bg-neutral-50 p-8 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-neutral-700 mb-6">联系方式</h3>
+                            
+                            <div class="space-y-6 mb-10">
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                        <i class="fa fa-map-marker text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-neutral-700 mb-1">公司地址</h4>
+                                        <p class="text-neutral-500">上海市浦东新区张江高科技园区科苑路88号</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                        <i class="fa fa-phone text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-neutral-700 mb-1">联系电话</h4>
+                                        <p class="text-neutral-500">400-777-8888</p>
+                                        <p class="text-sm text-neutral-400">周一至周日 9:00-18:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                        <i class="fa fa-envelope text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-neutral-700 mb-1">电子邮箱</h4>
+                                        <p class="text-neutral-500">service@77fu.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                        <i class="fa fa-weixin text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-neutral-700 mb-1">微信公众号</h4>
+                                        <p class="text-neutral-500">七七福宠物鲜粮</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-neutral-700 mb-4">营业时间</h3>
+                            <ul class="space-y-2 text-neutral-500">
+                                <li class="flex justify-between">
+                                    <span>周一至周五</span>
+                                    <span>9:00 - 18:00</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>周六至周日</span>
+                                    <span>10:00 - 16:00</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>法定节假日</span>
+                                    <span>10:00 - 15:00</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-10">
+                                <h3 class="text-xl font-bold text-neutral-700 mb-4">关注我们</h3>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
+                                        <i class="fa fa-weibo"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
+                                        <i class="fa fa-weixin"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 订阅区域 -->
+        <section class="py-16 bg-primary/10">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold text-neutral-700 mb-4">订阅七七福宠物健康资讯</h2>
+                    <p class="text-neutral-500 mb-8 max-w-2xl mx-auto">
+                        订阅我们的电子邮件，获取最新的宠物健康知识、高温杀菌工艺解析和专属优惠信息。
+                    </p>
+                    <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                        <input type="email" placeholder="请输入您的电子邮箱" class="flex-grow px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom">
+                        <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg transition-custom font-semibold shadow-md hover:shadow-lg whitespace-nowrap">
+                            立即订阅
+                        </button>
+                    </form>
+                    <p class="text-sm text-neutral-400 mt-4">
+                        我们尊重您的隐私，不会向第三方分享您的信息。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-neutral-700 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <span class="text-primary text-3xl"><i class="fa fa-paw"></i></span>
+                        <span class="text-2xl font-bold text-white">七七福</span>
+                    </div>
+                    <p class="text-neutral-300 mb-6">
+                        七七福采用高温高压杀菌工艺，致力于为宠物提供最天然、最安全的鲜粮，让每一位毛孩子都能享受到高品质的饮食。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-neutral-300 hover:text-primary transition-custom">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-300 hover:text-primary transition-custom">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-300 hover:text-primary transition-custom">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-300 hover:text-primary transition-custom">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">快速链接</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-neutral-300 hover:text-primary transition-custom">关于我们</a></li>
+                        <li><a href="#products" class="text-neutral-300 hover:text-primary transition-custom">产品系列</a></li>
+                        <li><a href="#advantages" class="text-neutral-300 hover:text-primary transition-custom">产品优势</a></li>
+                        <li><a href="#testimonials" class="text-neutral-300 hover:text-primary transition-custom">客户评价</a></li>
+                        <li><a href="#faq" class="text-neutral-300 hover:text-primary transition-custom">常见问题</a></li>
+                        <li><a href="#contact" class="text-neutral-300 hover:text-primary transition-custom">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">产品系列</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">幼犬活力鲜粮</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">成犬全能鲜粮</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">老年犬呵护鲜粮</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">幼猫成长鲜粮</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">成猫健康鲜粮</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-primary transition-custom">处方调理鲜粮</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">联系我们</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+                            <span class="text-neutral-300">上海市浦东新区张江高科技园区科苑路88号</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-primary mr-3"></i>
+                            <span class="text-neutral-300">400-777-8888</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-primary mr-3"></i>
+                            <span class="text-neutral-300">service@77fu.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-neutral-600 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-neutral-400 text-sm mb-4 md:mb-0">
+                        &copy; 2023 七七福宠物食品有限公司 版权所有 | 沪ICP备12345678号
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-neutral-400 hover:text-primary text-sm transition-custom">隐私政策</a>
+                        <a href="#" class="text-neutral-400 hover:text-primary text-sm transition-custom">服务条款</a>
+                        <a href="#" class="text-neutral-400 hover:text-primary text-sm transition-custom">配送说明</a>
+                        <a href="#" class="text-neutral-400 hover:text-primary text-sm transition-custom">退款政策</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // 切换图标
+            const icon = menuToggle.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-4', 'shadow-sm');
+            } else {
+                navbar.classList.add('py-4', 'shadow-sm');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // FAQ 折叠效果
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                // 切换当前FAQ的显示状态
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-45');
+                
+                // 关闭其他打开的FAQ
+                faqToggles.forEach(otherToggle => {
+                    if (otherToggle !== toggle) {
+                        otherToggle.nextElementSibling.classList.add('hidden');
+                        otherToggle.querySelector('i').classList.remove('rotate-45');
+                    }
+                });
+            });
+        });
+        
+        // 产品卡片滚动动画
+        const productCards = document.querySelectorAll('.product-card');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        productCards.forEach(card => {
+            observer.observe(card);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单（如果打开）
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    
