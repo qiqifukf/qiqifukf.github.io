@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七七福导航</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 配置Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .sidebar-item {
+                @apply flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-all;
+            }
+            .sidebar-item-active {
+                @apply bg-primary/10 text-primary font-medium;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+    <!-- 顶部导航栏 - 悬浮固定 -->
+    <header id="top-nav" class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- 网站Logo -->
+                <div class="flex items-center gap-2">
+                    <button id="sidebar-toggle" class="lg:hidden text-gray-600 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-2">
+                        <i class="fa fa-compass text-primary text-2xl"></i>
+                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">七七福导航</span>
+                    </a>
+                </div>
+                
+                <!-- 搜索框 -->
+                <div class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="search-input" placeholder="搜索网站..." 
+                            class="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:bg-white border border-gray-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                        <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- 右侧功能区 -->
+                <div class="flex items-center gap-4">
+                    <button class="md:hidden text-gray-600 hover:text-primary">
+                        <i class="fa fa-search text-xl"></i>
+                    </button>
+                    <a href="admin.html" class="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-all">
+                        <i class="fa fa-cog"></i>
+                        <span>管理</span>
+                    </a>
+                    <button id="theme-toggle" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all">
+                        <i class="fa fa-moon-o text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 pt-16 flex">
+        <!-- 侧边栏分类导航 - 固定定位，小屏自动隐藏 -->
+        <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-64 bg-white shadow-md z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-300">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold mb-3 text-gray-700">网站分类</h2>
+                <div id="category-list" class="space-y-1">
+                    <!-- 分类将通过JS动态生成 -->
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 侧边栏遮罩 -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden" onclick="toggleSidebar()"></div>
+        
+        <!-- 网站列表内容 -->
+        <div class="flex-1 lg:ml-64 p-4 md:p-6">
+            <!-- 移动端搜索框 -->
+            <div class="md:hidden mb-4">
+                <div class="relative w-full">
+                    <input type="text" placeholder="搜索网站..." 
+                        class="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:bg-white border border-gray-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                    <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+            
+            <!-- 当前分类标题 -->
+            <div class="mb-6">
+                <h1 id="current-category" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800">全部网站</h1>
+                <p class="text-gray-500 mt-1">发现并访问您喜爱的网站</p>
+            </div>
+            
+            <!-- 网站列表网格 -->
+            <div id="websites-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- 网站卡片将通过JS动态生成 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-gray-200 py-6 lg:ml-64">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">© 2025 七七福导航 - 简洁高效的网站导航</p>
+            <div class="flex justify-center gap-4 mt-3">
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 预置30个导航站点数据
+        const defaultWebsites = [
+            // 搜索引擎
+            { id: 1, name: 'Google', url: 'https://google.com', category: '搜索引擎', icon: 'https://www.google.com/favicon.ico' },
+            { id: 2, name: 'Bing', url: 'https://bing.com', category: '搜索引擎', icon: 'https://www.bing.com/favicon.ico' },
+            { id: 3, name: 'Yahoo', url: 'https://yahoo.com', category: '搜索引擎', icon: 'https://www.yahoo.com/favicon.ico' },
+            { id: 4, name: 'DuckDuckGo', url: 'https://duckduckgo.com', category: '搜索引擎', icon: 'https://duckduckgo.com/favicon.ico' },
+            { id: 5, name: '百度', url: 'https://baidu.com', category: '搜索引擎', icon: 'https://www.baidu.com/favicon.ico' },
+            
+            // 社交媒体
+            { id: 6, name: 'Facebook', url: 'https://facebook.com', category: '社交媒体', icon: 'https://www.facebook.com/favicon.ico' },
+            { id: 7, name: 'Twitter', url: 'https://twitter.com', category: '社交媒体', icon: 'https://twitter.com/favicon.ico' },
+            { id: 8, name: 'Instagram', url: 'https://instagram.com', category: '社交媒体', icon: 'https://www.instagram.com/favicon.ico' },
+            { id: 9, name: 'LinkedIn', url: 'https://linkedin.com', category: '社交媒体', icon: 'https://www.linkedin.com/favicon.ico' },
+            { id: 10, name: 'Pinterest', url: 'https://pinterest.com', category: '社交媒体', icon: 'https://www.pinterest.com/favicon.ico' },
+            
+            // 视频平台
+            { id: 11, name: 'YouTube', url: 'https://youtube.com', category: '视频平台', icon: 'https://www.youtube.com/favicon.ico' },
+            { id: 12, name: 'Netflix', url: 'https://netflix.com', category: '视频平台', icon: 'https://www.netflix.com/favicon.ico' },
+            { id: 13, name: 'Hulu', url: 'https://hulu.com', category: '视频平台', icon: 'https://www.hulu.com/favicon.ico' },
+            { id: 14, name: 'Disney+', url: 'https://disneyplus.com', category: '视频平台', icon: 'https://www.disneyplus.com/favicon.ico' },
+            { id: 15, name: 'Vimeo', url: 'https://vimeo.com', category: '视频平台', icon: 'https://vimeo.com/favicon.ico' },
+            
+            // 新闻资讯
+            { id: 16, name: 'CNN', url: 'https://cnn.com', category: '新闻资讯', icon: 'https://www.cnn.com/favicon.ico' },
+            { id: 17, name: 'BBC News', url: 'https://bbc.com/news', category: '新闻资讯', icon: 'https://www.bbc.com/favicon.ico' },
+            { id: 18, name: '纽约时报', url: 'https://nytimes.com', category: '新闻资讯', icon: 'https://www.nytimes.com/favicon.ico' },
+            { id: 19, name: '路透社', url: 'https://reuters.com', category: '新闻资讯', icon: 'https://www.reuters.com/favicon.ico' },
+            { id: 20, name: '美联社', url: 'https://apnews.com', category: '新闻资讯', icon: 'https://apnews.com/favicon.ico' },
+            
+            // 工具类
+            { id: 21, name: 'GitHub', url: 'https://github.com', category: '工具类', icon: 'https://github.com/favicon.ico' },
+            { id: 22, name: 'Stack Overflow', url: 'https://stackoverflow.com', category: '工具类', icon: 'https://stackoverflow.com/favicon.ico' },
+            { id: 23, name: 'Google Maps', url: 'https://maps.google.com', category: '工具类', icon: 'https://maps.google.com/favicon.ico' },
+            { id: 24, name: 'Dropbox', url: 'https://dropbox.com', category: '工具类', icon: 'https://www.dropbox.com/favicon.ico' },
+            { id: 25, name: 'Trello', url: 'https://trello.com', category: '工具类', icon: 'https://trello.com/favicon.ico' },
+            
+            // 电商平台
+            { id: 26, name: 'Amazon', url: 'https://amazon.com', category: '电商平台', icon: 'https://www.amazon.com/favicon.ico' },
+            { id: 27, name: 'eBay', url: 'https://ebay.com', category: '电商平台', icon: 'https://www.ebay.com/favicon.ico' },
+            { id: 28, name: '阿里巴巴', url: 'https://alibaba.com', category: '电商平台', icon: 'https://www.alibaba.com/favicon.ico' },
+            { id: 29, name: 'Shopify', url: 'https://shopify.com', category: '电商平台', icon: 'https://www.shopify.com/favicon.ico' },
+            { id: 30, name: 'Etsy', url: 'https://etsy.com', category: '电商平台', icon: 'https://www.etsy.com/favicon.ico' }
+        ];
+
+        // 初始化数据 - 从本地存储获取，若无则使用默认数据
+        function initData() {
+            const savedWebsites = localStorage.getItem('websites');
+            if (!savedWebsites) {
+                localStorage.setItem('websites', JSON.stringify(defaultWebsites));
+            }
+        }
+
+        // 获取所有网站数据
+        function getWebsites() {
+            return JSON.parse(localStorage.getItem('websites') || JSON.stringify(defaultWebsites));
+        }
+
+        // 获取所有分类
+        function getCategories() {
+            const websites = getWebsites();
+            const categories = ['全部网站', ...new Set(websites.map(website => website.category))];
+            return categories;
+        }
+
+        // 渲染分类列表
+        function renderCategories() {
+            const categoryList = document.getElementById('category-list');
+            const categories = getCategories();
+            
+            categoryList.innerHTML = '';
+            
+            categories.forEach(category => {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = `sidebar-item ${category === '全部网站' ? 'sidebar-item-active' : 'hover:bg-gray-100'}`;
+                categoryItem.innerHTML = `
+                    <i class="fa ${getCategoryIcon(category)} w-5 text-center"></i>
+                    <span>${category}</span>
+                `;
+                categoryItem.addEventListener('click', () => {
+                    filterByCategory(category);
+                    // 更新活跃状态
+                    document.querySelectorAll('.sidebar-item').forEach(item => {
+                        item.classList.remove('sidebar-item-active');
+                        item.classList.add('hover:bg-gray-100');
+                    });
+                    categoryItem.classList.add('sidebar-item-active');
+                    categoryItem.classList.remove('hover:bg-gray-100');
+                    
+                    // 在移动设备上点击分类后关闭侧边栏
+                    if (window.innerWidth < 1024) {
+                        toggleSidebar();
+                    }
+                });
+                categoryList.appendChild(categoryItem);
+            });
+        }
+
+        // 根据分类获取对应的图标
+        function getCategoryIcon(category) {
+            const icons = {
+                '全部网站': 'fa-th',
+                '搜索引擎': 'fa-search',
+                '社交媒体': 'fa-users',
+                '视频平台': 'fa-play-circle',
+                '新闻资讯': 'fa-newspaper-o',
+                '工具类': 'fa-wrench',
+                '电商平台': 'fa-shopping-cart'
+            };
+            return icons[category] || 'fa-globe';
+        }
+
+        // 根据分类筛选网站
+        function filterByCategory(category) {
+            const websites = getWebsites();
+            const filteredWebsites = category === '全部网站' 
+                ? websites 
+                : websites.filter(website => website.category === category);
+            
+            document.getElementById('current-category').textContent = category;
+            renderWebsites(filteredWebsites);
+        }
+
+        // 渲染网站列表
+        function renderWebsites(websites) {
+            const websitesGrid = document.getElementById('websites-grid');
+            websitesGrid.innerHTML = '';
+            
+            if (websites.length === 0) {
+                websitesGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa fa-frown-o text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-500">没有找到符合条件的网站</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            websites.forEach(website => {
+                const websiteCard = document.createElement('div');
+                websiteCard.className = 'bg-white rounded-xl shadow-sm overflow-hidden card-hover border border-gray-100';
+                websiteCard.innerHTML = `
+                    <a href="${website.url}" target="_blank" class="block h-full">
+                        <div class="p-4 flex flex-col items-center justify-center text-center h-full">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3 overflow-hidden">
+                                <img src="${website.icon}" alt="${website.name}图标" class="w-full h-full object-contain p-1" 
+                                    onerror="this.src='https://picsum.photos/48/48?random=${website.id}'">
+                            </div>
+                            <h3 class="font-medium text-gray-800 line-clamp-1">${website.name}</h3>
+                            <p class="text-xs text-gray-500 mt-1 line-clamp-1">${new URL(website.url).hostname}</p>
+                        </div>
+                    </a>
+                `;
+                websitesGrid.appendChild(websiteCard);
+            });
+        }
+
+        // 切换侧边栏（仅在移动设备上有效）
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        // 页面滚动时改变顶部导航样式
+        window.addEventListener('scroll', () => {
+            const topNav = document.getElementById('top-nav');
+            if (window.scrollY > 10) {
+                topNav.classList.add('shadow');
+                topNav.classList.remove('shadow-sm');
+            } else {
+                topNav.classList.remove('shadow');
+                topNav.classList.add('shadow-sm');
+            }
+        });
+
+        // 初始化页面
+        function init() {
+            initData();
+            renderCategories();
+            filterByCategory('全部网站');
+            
+            // 绑定侧边栏切换事件
+            document.getElementById('sidebar-toggle').addEventListener('click', toggleSidebar);
+            
+            // 搜索功能
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const websites = getWebsites();
+                const filteredWebsites = websites.filter(website => 
+                    website.name.toLowerCase().includes(searchTerm) || 
+                    website.url.toLowerCase().includes(searchTerm) ||
+                    website.category.toLowerCase().includes(searchTerm)
+                );
+                renderWebsites(filteredWebsites);
+                document.getElementById('current-category').textContent = `搜索结果: "${searchTerm}"`;
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
