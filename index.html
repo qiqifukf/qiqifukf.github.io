@@ -1,418 +1,771 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>七七福导航</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script type="text/javascript">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>七七福导航 - 精选实用网站导航，便捷上网从这里开始</title>
+  <!-- SEO元标签 -->
+  <meta name="description" content="七七福导航是一个精选实用网站的导航平台，汇集网盘搜索、影音娱乐、AI工具、学习资源等各类优质网站，让您的上网更便捷高效。">
+  <meta name="keywords" content="七七福导航,网址导航,实用网站,网盘搜索,影音娱乐,AI工具,学习资源,导航网站">
+  <meta name="author" content="七七福导航">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+      <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "syji14meh6");
 </script>
-    <script>
-        // 配置Tailwind
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        dark: '#1E293B',
-                        light: '#F8FAFC'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
+  
+  <!-- 外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#0FC6C2',
+            neutral: {
+              100: '#F5F7FA',
+              200: '#E5E6EB',
+              300: '#C9CDD4',
+              400: '#86909C',
+              500: '#4E5969',
+              600: '#272E3B',
+              700: '#1D2129',
             }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .card-hover {
-                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-            }
-            .sidebar-item {
-                @apply flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-all;
-            }
-            .sidebar-item-active {
-                @apply bg-primary/10 text-primary font-medium;
-            }
-        }
-    </style>
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 2px 8px 0 rgba(0, 0, 0, 0.08)',
+            'hover': '0 4px 16px 0 rgba(0, 0, 0, 0.12)',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .sidebar-item-active {
+        @apply bg-primary/10 text-primary border-l-4 border-primary;
+      }
+      .card-transition {
+        @apply transition-all duration-300 ease-in-out;
+      }
+      .logo-size {
+        @apply w-10 h-10 rounded-md;
+      }
+      /* 图标加载失败时显示默认样式 */
+      .favicon-fallback {
+        @apply flex items-center justify-center bg-neutral-100 text-neutral-500 font-medium;
+      }
+      .category-hidden {
+        @apply hidden;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
-    <!-- 顶部导航栏 - 悬浮固定 -->
-    <header id="top-nav" class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                <!-- 网站Logo -->
-                <div class="flex items-center gap-2">
-                    <button id="sidebar-toggle" class="lg:hidden text-gray-600 hover:text-primary">
-                        <i class="fa fa-bars text-xl"></i>
-                    </button>
-                    <a href="#" class="flex items-center gap-2">
-                        <i class="fa fa-compass text-primary text-2xl"></i>
-                        <span class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">七七福导航</span>
-                    </a>
-                </div>
-                
-                <!-- 搜索框 -->
-                <div class="hidden md:flex items-center flex-1 max-w-xl mx-8">
-                    <div class="relative w-full">
-                        <input type="text" id="search-input-desktop" placeholder="搜索网站..." 
-                            class="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:bg-white border border-gray-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
-                        <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                </div>
-                
-                <!-- 右侧功能区 -->
-                <div class="flex items-center gap-4">
-                    <button id="mobile-search-toggle" class="md:hidden text-gray-600 hover:text-primary">
-                        <i class="fa fa-search text-xl"></i>
-                    </button>
-                    <a href="admin.html" class="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-all">
-                        <i class="fa fa-cog"></i>
-                        <span>管理</span>
-                    </a>
-                    <button id="theme-toggle" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all">
-                        <i class="fa fa-moon-o text-gray-600"></i>
-                    </button>
-                </div>
+<body class="font-inter bg-neutral-100 text-neutral-700 min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-30 transition-all duration-300" id="header">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <!-- 左侧Logo和标题 -->
+        <div class="flex items-center space-x-3">
+          <button id="sidebar-toggle" class="lg:hidden text-neutral-500 hover:text-primary transition-colors">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
+              <i class="fa fa-compass"></i>
             </div>
+            <h1 class="ml-3 text-xl font-semibold text-neutral-700">七七福导航</h1>
+          </div>
         </div>
-    </header>
+        
+        <!-- 中间搜索框 - 仅在中等以上屏幕显示 -->
+        <div class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+          <div class="relative w-full">
+            <input type="text" placeholder="搜索网站..." 
+                  class="w-full pl-10 pr-4 py-2 rounded-full border border-neutral-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
+            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 pt-16">
+    <!-- 侧边导航栏 -->
+    <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-64 bg-white shadow-sm z-20 transform transition-transform duration-300 lg:translate-x-0 overflow-y-auto">
+      <nav class="p-4" aria-label="主导航">
+        <ul class="space-y-1">
+          <li>
+            <a href="#all" class="sidebar-item-active flex items-center px-4 py-3 text-sm font-medium rounded-lg" aria-current="page" data-category="all">
+              <i class="fa fa-th-large w-5 text-center mr-3"></i>
+              <span>全部网站</span>
+            </a>
+          </li>
+          <!-- 侧边栏分类 - 默认分类移到最上方 -->
+          <li>
+            <a href="#default" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="default">
+              <i class="fa fa-folder w-5 text-center mr-3"></i>
+              <span>默认分类</span>
+            </a>
+          </li>
+          <li>
+            <a href="#netdisk" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="netdisk">
+              <i class="fa fa-cloud w-5 text-center mr-3"></i>
+              <span>网盘搜索</span>
+            </a>
+          </li>
+          <li>
+            <a href="#entertainment" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="entertainment">
+              <i class="fa fa-film w-5 text-center mr-3"></i>
+              <span>影音娱乐</span>
+            </a>
+          </li>
+          <li>
+            <a href="#ai" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="ai">
+              <i class="fa fa-robot w-5 text-center mr-3"></i>
+              <span>AI导航</span>
+            </a>
+          </li>
+          <li>
+            <a href="#bookmark" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="bookmark">
+              <i class="fa fa-bookmark-o w-5 text-center mr-3"></i>
+              <span>书签栏</span>
+            </a>
+          </li>
+          <li>
+            <a href="#resources" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="resources">
+              <i class="fa fa-database w-5 text-center mr-3"></i>
+              <span>资源导航</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tools" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="tools">
+              <i class="fa fa-wrench w-5 text-center mr-3"></i>
+              <span>常用工具</span>
+            </a>
+          </li>
+          <li>
+            <a href="#study" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-neutral-100 transition-colors" data-category="study">
+              <i class="fa fa-graduation-cap w-5 text-center mr-3"></i>
+              <span>在线学习</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
 
     <!-- 主内容区 -->
-    <main class="flex-1 pt-16 flex">
-        <!-- 侧边栏分类导航 - 固定定位，小屏自动隐藏 -->
-        <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-64 bg-white shadow-md z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-300">
-            <div class="p-4">
-                <h2 class="text-lg font-semibold mb-3 text-gray-700">网站分类</h2>
-                <div id="category-list" class="space-y-1">
-                    <!-- 分类将通过JS动态生成 -->
-                </div>
-            </div>
-        </aside>
-        
-        <!-- 侧边栏遮罩 -->
-        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden" onclick="toggleSidebar()"></div>
-        
-        <!-- 网站列表内容 -->
-        <div class="flex-1 lg:ml-64 p-4 md:p-6">
-            <!-- 移动端搜索框 -->
-            <div id="mobile-search-container" class="md:hidden mb-4">
-                <div class="relative w-full">
-                    <input type="text" id="search-input-mobile" placeholder="搜索网站..." 
-                        class="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 focus:bg-white border border-gray-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
-                    <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                </div>
-            </div>
-            
-            <!-- 当前分类标题 -->
-            <div class="mb-6">
-                <h1 id="current-category" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800">全部网站</h1>
-                <p class="text-gray-500 mt-1">发现并访问您喜爱的网站</p>
-            </div>
-            
-            <!-- 网站列表网格 -->
-            <div id="websites-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- 网站卡片将通过JS动态生成 -->
-            </div>
+    <main class="flex-1 lg:ml-64 transition-all duration-300" id="main-content">
+      <div class="container mx-auto px-4 py-6">
+        <!-- 移动端搜索框 -->
+        <div class="md:hidden mb-6">
+          <div class="relative w-full">
+            <input type="text" placeholder="搜索网站..." 
+                  class="w-full pl-10 pr-4 py-2 rounded-full border border-neutral-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
+            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+          </div>
         </div>
+        
+        <!-- 网站介绍 - 增强SEO -->
+        <section class="mb-8 bg-white rounded-xl p-6 shadow-card">
+          <h2 class="text-xl font-semibold mb-3">欢迎使用七七福导航</h2>
+          <p class="text-neutral-600 mb-4">七七福导航是一个精心整理的网址导航平台，汇集了互联网上各类优质实用的网站资源。我们分类清晰，更新及时，致力于为您提供便捷的上网体验，让您轻松找到所需的各类网站资源。</p>
+          <p class="text-neutral-600">本站包含网盘搜索、影音娱乐、AI工具、学习资源等多个分类，满足您工作、学习和娱乐的多样化需求。</p>
+        </section>
+        
+        <!-- 广告横幅 -->
+        <section class="mb-8">
+          <a href="http://qiqifu.com" target="_blank" rel="noopener noreferrer">
+            <div class="bg-primary rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="relative">
+                <div class="bg-gradient-to-r from-primary to-secondary p-6 text-white text-center">
+                  <h2 class="text-2xl font-bold mb-2">七七福官方网站</h2>
+                  <p class="text-lg mb-4">点击访问获取更多精彩内容和服务</p>
+                  <button class="bg-white text-primary font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">立即访问</button>
+                </div>
+              </div>
+            </div>
+          </a>
+        </section>
+        
+        <!-- 默认分类 -->
+        <section id="default" class="mb-10 category-section" data-category="default">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">默认分类</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="http://qiqifu.com" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="七七福 - 官方网站">
+              <div class="logo-size mb-3">
+                <img src="http://qiqifu.com/favicon.ico" alt="七七福 logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='七';">
+              </div>
+              <h3 class="text-sm font-medium text-center">七七福</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 网盘搜索分类 -->
+        <section id="netdisk" class="mb-10 category-section" data-category="netdisk">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">网盘搜索</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="https://panyq.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="盘友圈 - 专业的网盘资源搜索平台">
+              <div class="logo-size mb-3">
+                <img src="https://panyq.com/favicon.ico" alt="panyq.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='盘';">
+              </div>
+              <h3 class="text-sm font-medium text-center">盘友圈</h3>
+            </a>
+            <a href="https://www.xiongdipan.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="兄弟盘 - 高效的网盘资源搜索工具">
+              <div class="logo-size mb-3">
+                <img src="https://www.xiongdipan.com/favicon.ico" alt="xiongdipan.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='兄';">
+              </div>
+              <h3 class="text-sm font-medium text-center">兄弟盘</h3>
+            </a>
+            <a href="https://www.sosoyunpan.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="网盘密码提取 - 快速获取网盘资源密码">
+              <div class="logo-size mb-3">
+                <img src="https://www.sosoyunpan.com/favicon.ico" alt="sosoyunpan.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='密';">
+              </div>
+              <h3 class="text-sm font-medium text-center">网盘密码提取</h3>
+            </a>
+            <a href="https://www.xuesousou.net/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="学搜搜 - 专注学习资料的网盘搜索">
+              <div class="logo-size mb-3">
+                <img src="https://www.xuesousou.net/favicon.ico" alt="xuesousou.net logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='学';">
+              </div>
+              <h3 class="text-sm font-medium text-center">学搜搜</h3>
+            </a>
+            <a href="http://www.xgsoso.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="西瓜搜搜 - 综合网盘资源搜索引擎">
+              <div class="logo-size mb-3">
+                <img src="http://www.xgsoso.com/favicon.ico" alt="xgsoso.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='西';">
+              </div>
+              <h3 class="text-sm font-medium text-center">西瓜搜搜</h3>
+            </a>
+            <a href="https://tgso.top/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="TG资源网 - 电报资源搜索平台">
+              <div class="logo-size mb-3">
+                <img src="https://tgso.top/favicon.ico" alt="tgso.top logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='T';">
+              </div>
+              <h3 class="text-sm font-medium text-center">TG资源网</h3>
+            </a>
+            <a href="https://duanjugou.top/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="短剧狗 - 短剧资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://duanjugou.top/favicon.ico" alt="duanjugou.top logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='短';">
+              </div>
+              <h3 class="text-sm font-medium text-center">短剧狗</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 影音娱乐分类 -->
+        <section id="entertainment" class="mb-10 category-section" data-category="entertainment">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">影音娱乐</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="哔哩哔哩 - 视频分享平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.bilibili.com/favicon.ico" alt="bilibili.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='B';">
+              </div>
+              <h3 class="text-sm font-medium text-center">哔哩哔哩</h3>
+            </a>
+            <a href="https://www.vlogdownloader.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="视频解析下载 - 在线视频下载工具">
+              <div class="logo-size mb-3">
+                <img src="https://www.vlogdownloader.com/favicon.ico" alt="vlogdownloader.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='下';">
+              </div>
+              <h3 class="text-sm font-medium text-center">视频解析下载</h3>
+            </a>
+            <a href="http://tools.liumingye.cn/music/?page=searchPage#/search/M/song/Burn%20Me%20Down" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="mp3下载 - 在线音乐下载工具">
+              <div class="logo-size mb-3">
+                <img src="http://tools.liumingye.cn/favicon.ico" alt="音乐下载 logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='音';">
+              </div>
+              <h3 class="text-sm font-medium text-center">mp3下载</h3>
+            </a>
+            <a href="https://vip.star8.cn/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="星凌解析 - 视频解析服务">
+              <div class="logo-size mb-3">
+                <img src="https://vip.star8.cn/favicon.ico" alt="star8.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='星';">
+              </div>
+              <h3 class="text-sm font-medium text-center">星凌解析</h3>
+            </a>
+            <a href="https://greenvideo.cc/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="GreenVideo视频解析">
+              <div class="logo-size mb-3">
+                <img src="https://greenvideo.cc/favicon.ico" alt="greenvideo.cc logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='绿';">
+              </div>
+              <h3 class="text-sm font-medium text-center">GreenVideo解析</h3>
+            </a>
+            <a href="https://yemu.xyz/shouye/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="夜幕解析 - 视频解析平台">
+              <div class="logo-size mb-3">
+                <img src="https://yemu.xyz/favicon.ico" alt="yemu.xyz logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='夜';">
+              </div>
+              <h3 class="text-sm font-medium text-center">夜幕解析</h3>
+            </a>
+            <a href="https://jiexi.site/so.php" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="解析网站 - 通用视频解析">
+              <div class="logo-size mb-3">
+                <img src="https://jiexi.site/favicon.ico" alt="jiexi.site logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='解';">
+              </div>
+              <h3 class="text-sm font-medium text-center">解析网站</h3>
+            </a>
+            <a href="https://www.vv3nwjk.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="金牌影院 - 影视观看平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.vv3nwjk.com/favicon.ico" alt="vv3nwjk.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='金';">
+              </div>
+              <h3 class="text-sm font-medium text-center">金牌影院</h3>
+            </a>
+            <a href="https://ylsp.tv/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="永乐视频 - 影视资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://ylsp.tv/favicon.ico" alt="ylsp.tv logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='永';">
+              </div>
+              <h3 class="text-sm font-medium text-center">永乐视频</h3>
+            </a>
+            <a href="https://www.sxzxc.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="68影院 - 在线影视网站">
+              <div class="logo-size mb-3">
+                <img src="https://www.sxzxc.com/favicon.ico" alt="sxzxc.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='6';">
+              </div>
+              <h3 class="text-sm font-medium text-center">68影院</h3>
+            </a>
+            <a href="https://www.7.movie/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="7点电影 - 电影资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.7.movie/favicon.ico" alt="7.movie logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='7';">
+              </div>
+              <h3 class="text-sm font-medium text-center">7点电影</h3>
+            </a>
+            <a href="https://www.novipnoad.cc/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="NO视频 - 无广告视频平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.novipnoad.cc/favicon.ico" alt="novipnoad.cc logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='N';">
+              </div>
+              <h3 class="text-sm font-medium text-center">NO视频</h3>
+            </a>
+            <a href="https://www.agedm.vip/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="AGE动漫 - 动漫资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.agedm.vip/favicon.ico" alt="agedm.vip logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='动';">
+              </div>
+              <h3 class="text-sm font-medium text-center">AGE动漫</h3>
+            </a>
+            <a href="https://skr.skr3.cc:666/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="樱之空动漫 - 动漫资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://skr.skr3.cc/favicon.ico" alt="樱之空动漫 logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='樱';">
+              </div>
+              <h3 class="text-sm font-medium text-center">樱之空动漫</h3>
+            </a>
+            <a href="https://cn.baozimhcn.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="包子漫画 - 漫画阅读平台">
+              <div class="logo-size mb-3">
+                <img src="https://cn.baozimhcn.com/favicon.ico" alt="baozimhcn.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='漫';">
+              </div>
+              <h3 class="text-sm font-medium text-center">包子漫画</h3>
+            </a>
+            <a href="https://mianfei22.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="找书神器 - 电子书资源平台">
+              <div class="logo-size mb-3">
+                <img src="https://mianfei22.com/favicon.ico" alt="mianfei22.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='书';">
+              </div>
+              <h3 class="text-sm font-medium text-center">找书神器</h3>
+            </a>
+            <a href="https://www.ysjf.com/home" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="影视飓风 - 影视制作平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.ysjf.com/favicon.ico" alt="ysjf.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='飓';">
+              </div>
+              <h3 class="text-sm font-medium text-center">影视飓风</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- AI导航分类 -->
+        <section id="ai" class="mb-10 category-section" data-category="ai">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">AI导航</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="http://doubao.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="豆包 - 字节跳动AI助手">
+              <div class="logo-size mb-3">
+                <img src="http://doubao.com/favicon.ico" alt="doubao.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='豆';">
+              </div>
+              <h3 class="text-sm font-medium text-center">豆包</h3>
+            </a>
+            <a href="https://www.deepseek.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="DeepSeek | 深度求索">
+              <div class="logo-size mb-3">
+                <img src="https://www.deepseek.com/favicon.ico" alt="deepseek.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='深';">
+              </div>
+              <h3 class="text-sm font-medium text-center">DeepSeek</h3>
+            </a>
+            <a href="https://www.liblib.art/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="Liblib - AI绘画平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.liblib.art/favicon.ico" alt="liblib.art logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='绘';">
+              </div>
+              <h3 class="text-sm font-medium text-center">Liblib</h3>
+            </a>
+            <a href="https://www.runninghub.cn/workflows" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="runninghub - AI工作流平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.runninghub.cn/favicon.ico" alt="runninghub.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='流';">
+              </div>
+              <h3 class="text-sm font-medium text-center">runninghub</h3>
+            </a>
+            <a href="https://xinghuo.xfyun.cn/desk" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="讯飞星火认知大模型">
+              <div class="logo-size mb-3">
+                <img src="https://xinghuo.xfyun.cn/favicon.ico" alt="xfyun.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='讯';">
+              </div>
+              <h3 class="text-sm font-medium text-center">讯飞星火</h3>
+            </a>
+            <a href="https://ai.shiliuai.com/id_photo/jn?page_type=single_colthes&bd_vid=8877227767486453663" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="证件照制作 - AI证件照工具">
+              <div class="logo-size mb-3">
+                <img src="https://ai.shiliuai.com/favicon.ico" alt="shiliuai.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='证';">
+              </div>
+              <h3 class="text-sm font-medium text-center">证件照制作</h3>
+            </a>
+            <a href="https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=detail&fr=baiduimageedit&hs=0&xthttps=111110&sf=1&fmq=1713767239197_R&pv=&ic=0&nc=1&z=&se=&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=bdaitpzs%E7%99%BE%E5%BA%A6AI%E5%9B%BE%E7%89%87%E5%8A%A9%E6%89%8Bbdaitpzs&oq=%E5%9B%BE%E7%89%87&rsp=-1&lid=17011885230577025060&toolType=1" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="百度AI图片助手">
+              <div class="logo-size mb-3">
+                <img src="https://image.baidu.com/favicon.ico" alt="baidu.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='百';">
+              </div>
+              <h3 class="text-sm font-medium text-center">百度AI图片助手</h3>
+            </a>
+            <a href="https://www.birme.net/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="切图片分辨率512*512 - 图片处理工具">
+              <div class="logo-size mb-3">
+                <img src="https://www.birme.net/favicon.ico" alt="birme.net logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='切';">
+              </div>
+              <h3 class="text-sm font-medium text-center">图片分辨率处理</h3>
+            </a>
+            <a href="https://cp.baidu.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="橙篇AI - 百度AI创作平台">
+              <div class="logo-size mb-3">
+                <img src="https://cp.baidu.com/favicon.ico" alt="cp.baidu.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='橙';">
+              </div>
+              <h3 class="text-sm font-medium text-center">橙篇AI</h3>
+            </a>
+            <a href="https://noiz.ai/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="Noiz AI - AI音频工具">
+              <div class="logo-size mb-3">
+                <img src="https://noiz.ai/favicon.ico" alt="noiz.ai logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='音';">
+              </div>
+              <h3 class="text-sm font-medium text-center">Noiz AI</h3>
+            </a>
+            <a href="https://space.coze.cn/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="扣子空间 - AI助手平台">
+              <div class="logo-size mb-3">
+                <img src="https://space.coze.cn/favicon.ico" alt="coze.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='扣';">
+              </div>
+              <h3 class="text-sm font-medium text-center">扣子空间</h3>
+            </a>
+            <a href="https://jimeng.jianying.com/ai-tool/home/?utm_medium=baiduads&utm_source=pinzhuan&utm_campaign=button" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="即梦AI - 一站式AI创作平台">
+              <div class="logo-size mb-3">
+                <img src="https://jimeng.jianying.com/favicon.ico" alt="jianying.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='即';">
+              </div>
+              <h3 class="text-sm font-medium text-center">即梦AI</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 书签栏分类 -->
+        <section id="bookmark" class="mb-10 category-section" data-category="bookmark">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">书签栏</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="http://www.anbeipet.com/col.jsp?id=131" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="安贝（北京）宠物食品有限公司">
+              <div class="logo-size mb-3">
+                <img src="http://www.anbeipet.com/favicon.ico" alt="anbeipet.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='安';">
+              </div>
+              <h3 class="text-sm font-medium text-center">安贝宠物食品</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 资源导航分类 -->
+        <section id="resources" class="mb-10 category-section" data-category="resources">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">资源导航</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="https://free.baipiao.top/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="白嫖资源网 - 收录全网免费好用资源的导航网站">
+              <div class="logo-size mb-3">
+                <img src="https://free.baipiao.top/favicon.ico" alt="baipiao.top logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='嫖';">
+              </div>
+              <h3 class="text-sm font-medium text-center">白嫖资源网</h3>
+            </a>
+            <a href="https://www.modelscope.cn/models" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="模型库首页 · 魔搭社区">
+              <div class="logo-size mb-3">
+                <img src="https://www.modelscope.cn/favicon.ico" alt="modelscope.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='模';">
+              </div>
+              <h3 class="text-sm font-medium text-center">魔搭社区</h3>
+            </a>
+            <a href="https://www.shejibaozang.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="设计宝藏 – 免费分享影视后期设计工具">
+              <div class="logo-size mb-3">
+                <img src="https://www.shejibaozang.com/favicon.ico" alt="shejibaozang.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='设';">
+              </div>
+              <h3 class="text-sm font-medium text-center">设计宝藏</h3>
+            </a>
+            <a href="https://toolwa.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="工具哇 - 实用工具集合">
+              <div class="logo-size mb-3">
+                <img src="https://toolwa.com/favicon.ico" alt="toolwa.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='工';">
+              </div>
+              <h3 class="text-sm font-medium text-center">工具哇</h3>
+            </a>
+            <a href="https://www.mixamo.com/#/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="Mixamo - 3D角色动画资源">
+              <div class="logo-size mb-3">
+                <img src="https://www.mixamo.com/favicon.ico" alt="mixamo.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='动';">
+              </div>
+              <h3 class="text-sm font-medium text-center">Mixamo</h3>
+            </a>
+            <a href="https://actorcore.reallusion.com/motion/free?tag=Female" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="ActorCore - 免费3D动作捕捉资源">
+              <div class="logo-size mb-3">
+                <img src="https://actorcore.reallusion.com/favicon.ico" alt="reallusion.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='捕';">
+              </div>
+              <h3 class="text-sm font-medium text-center">ActorCore</h3>
+            </a>
+            <a href="https://font.sucai999.com/?&amp;page=8" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="字体搬运工-免费商用字体下载">
+              <div class="logo-size mb-3">
+                <img src="https://font.sucai999.com/favicon.ico" alt="sucai999.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='字';">
+              </div>
+              <h3 class="text-sm font-medium text-center">字体搬运工</h3>
+            </a>
+            <a href="https://erhua.cc/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="二花虚拟资源网 - 虚拟资源分享平台">
+              <div class="logo-size mb-3">
+                <img src="https://erhua.cc/favicon.ico" alt="erhua.cc logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='二';">
+              </div>
+              <h3 class="text-sm font-medium text-center">二花虚拟资源网</h3>
+            </a>
+            <a href="https://www.me991.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="欣辰宝库-软件免费下载平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.me991.com/favicon.ico" alt="me991.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='软';">
+              </div>
+              <h3 class="text-sm font-medium text-center">欣辰宝库</h3>
+            </a>
+            <a href="https://www.jb51.net/books/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="脚本之家 - 计算机免费书籍下载">
+              <div class="logo-size mb-3">
+                <img src="https://www.jb51.net/favicon.ico" alt="jb51.net logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='书';">
+              </div>
+              <h3 class="text-sm font-medium text-center">脚本之家书籍</h3>
+            </a>
+            <a href="https://www.bycwedu.com/page/815879268" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="Bo学堂公开课源码资料">
+              <div class="logo-size mb-3">
+                <img src="https://www.bycwedu.com/favicon.ico" alt="bycwedu.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='课';">
+              </div>
+              <h3 class="text-sm font-medium text-center">Bo学堂</h3>
+            </a>
+            <a href="https://font.chinaz.com/mianfei.html" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="中文免费商用字体下载">
+              <div class="logo-size mb-3">
+                <img src="https://font.chinaz.com/favicon.ico" alt="chinaz.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='字';">
+              </div>
+              <h3 class="text-sm font-medium text-center">免费商用字体</h3>
+            </a>
+            <a href="https://www.plnav.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="迷鹿导航 - 资源导航平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.plnav.com/favicon.ico" alt="plnav.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='迷';">
+              </div>
+              <h3 class="text-sm font-medium text-center">迷鹿导航</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 常用工具分类 -->
+        <section id="tools" class="mb-10 category-section" data-category="tools">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">常用工具</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="https://wanwang.aliyun.com/domain/searchresult/?domainCartTradeParams=dr_29379033_1725267269666&spm=5176.29379033.J_fUNSUVBzhRP-3yTOu3xXF.domain-just-search&keyword=qiqifu&suffix=.com" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="域名注册 - 阿里云域名服务">
+              <div class="logo-size mb-3">
+                <img src="https://wanwang.aliyun.com/favicon.ico" alt="aliyun.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='域';">
+              </div>
+              <h3 class="text-sm font-medium text-center">域名注册</h3>
+            </a>
+            <a href="https://creator.douyin.com/creator-micro/data/stats/video/7310874513053404426?enter_from=homepage" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="抖音创作者中心">
+              <div class="logo-size mb-3">
+                <img src="https://creator.douyin.com/favicon.ico" alt="douyin.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='抖';">
+              </div>
+              <h3 class="text-sm font-medium text-center">抖音创作者中心</h3>
+            </a>
+            <a href="https://creator.douyin.com/creator-school/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="抖音创作者学习中心">
+              <div class="logo-size mb-3">
+                <img src="https://creator.douyin.com/favicon.ico" alt="douyin.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='学';">
+              </div>
+              <h3 class="text-sm font-medium text-center">抖音创作者学院</h3>
+            </a>
+            <a href="https://cover.weixin.qq.com/cgi-bin/mmcover-bin/readtemplate?t=page/index#/signup/choose_person_type" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="微信红包封面开放平台">
+              <div class="logo-size mb-3">
+                <img src="https://cover.weixin.qq.com/favicon.ico" alt="weixin.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='微';">
+              </div>
+              <h3 class="text-sm font-medium text-center">微信红包封面</h3>
+            </a>
+            <a href="https://register.ccopyright.com.cn/registration.html#/registerOpus" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="中国版权登记业务平台">
+              <div class="logo-size mb-3">
+                <img src="https://register.ccopyright.com.cn/favicon.ico" alt="ccopyright.com.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='版';">
+              </div>
+              <h3 class="text-sm font-medium text-center">版权登记平台</h3>
+            </a>
+            <a href="https://www.osta.org.cn/skillStandard" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="技能人才评价证书全国联网查询">
+              <div class="logo-size mb-3">
+                <img src="https://www.osta.org.cn/favicon.ico" alt="osta.org.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='证';">
+              </div>
+              <h3 class="text-sm font-medium text-center">技能证书查询</h3>
+            </a>
+            <a href="https://app.diagrams.net/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="在线绘图 - 流程图绘制工具">
+              <div class="logo-size mb-3">
+                <img src="https://app.diagrams.net/favicon.ico" alt="diagrams.net logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='图';">
+              </div>
+              <h3 class="text-sm font-medium text-center">在线绘图</h3>
+            </a>
+            <a href="https://www.riskbird.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="风鸟企业查询平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.riskbird.com/favicon.ico" alt="riskbird.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='企';">
+              </div>
+              <h3 class="text-sm font-medium text-center">风鸟企业查询</h3>
+            </a>
+            <a href="https://wx.qq.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="微信网页版">
+              <div class="logo-size mb-3">
+                <img src="https://wx.qq.com/favicon.ico" alt="wx.qq.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='微';">
+              </div>
+              <h3 class="text-sm font-medium text-center">微信网页版</h3>
+            </a>
+            <a href="https://sbj.cnipa.gov.cn/sbj/index.html" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="中国商标网 - 商标查询与注册">
+              <div class="logo-size mb-3">
+                <img src="https://sbj.cnipa.gov.cn/favicon.ico" alt="cnipa.gov.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='商';">
+              </div>
+              <h3 class="text-sm font-medium text-center">中国商标网</h3>
+            </a>
+            <a href="https://www.csapa.org/index.jhtml" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="中国小动物保护协会">
+              <div class="logo-size mb-3">
+                <img src="https://www.csapa.org/favicon.ico" alt="csapa.org logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='宠';">
+              </div>
+              <h3 class="text-sm font-medium text-center">小动物保护协会</h3>
+            </a>
+            <a href="https://tongji.baidu.com/main/overview/10000141595/overview/index?siteId=22287879" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="百度统计 - 网站数据分析工具">
+              <div class="logo-size mb-3">
+                <img src="https://tongji.baidu.com/favicon.ico" alt="baidu.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='统';">
+              </div>
+              <h3 class="text-sm font-medium text-center">百度统计</h3>
+            </a>
+            <a href="https://www.slbqw.com/#/portal" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="丝路版权网">
+              <div class="logo-size mb-3">
+                <img src="https://www.slbqw.com/favicon.ico" alt="slbqw.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='丝';">
+              </div>
+              <h3 class="text-sm font-medium text-center">丝路版权网</h3>
+            </a>
+            <a href="https://www.sxxc.gov.cn/#/onlineServices?id=6" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="版权登记-陕西">
+              <div class="logo-size mb-3">
+                <img src="https://www.sxxc.gov.cn/favicon.ico" alt="sxxc.gov.cn logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='陕';">
+              </div>
+              <h3 class="text-sm font-medium text-center">陕西版权登记</h3>
+            </a>
+          </div>
+        </section>
+        
+        <!-- 在线学习分类 -->
+        <section id="study" class="mb-10 category-section" data-category="study">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-neutral-700">在线学习</h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <a href="https://www.xiachufang.com/category/178/?page=2" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="菜谱 - 下厨房美食教程">
+              <div class="logo-size mb-3">
+                <img src="https://www.xiachufang.com/favicon.ico" alt="xiachufang.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='菜';">
+              </div>
+              <h3 class="text-sm font-medium text-center">菜谱</h3>
+            </a>
+            <a href="https://coursehome.zhihuishu.com/courseHome/1000007761#resourse" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="宠物饲养技术—智慧树网">
+              <div class="logo-size mb-3">
+                <img src="https://coursehome.zhihuishu.com/favicon.ico" alt="zhihuishu.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='宠';">
+              </div>
+              <h3 class="text-sm font-medium text-center">宠物饲养技术</h3>
+            </a>
+            <a href="https://www.xuetangx.com/search?query=%E5%AE%A0%E7%89%A9&amp;org=&amp;classify=&amp;type=&amp;status=&amp;page=1" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl p-4 shadow-card hover:shadow-hover card-transition flex flex-col items-center" title="学堂在线 - 精品在线课程学习平台">
+              <div class="logo-size mb-3">
+                <img src="https://www.xuetangx.com/favicon.ico" alt="xuetangx.com logo" class="logo-size object-cover" onerror="this.parentElement.classList.add('favicon-fallback'); this.parentElement.innerHTML='学';">
+              </div>
+              <h3 class="text-sm font-medium text-center">学堂在线</h3>
+            </a>
+          </div>
+        </section>
+      </div>
     </main>
+  </div>
 
-    <!-- 页脚 -->
-    <footer class="bg-white border-t border-gray-200 py-6 lg:ml-64">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-500 text-sm">© 2025 七七福导航 - 简洁高效的网站导航</p>
-            <div class="flex justify-center gap-4 mt-3">
-                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                    <i class="fa fa-github"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                    <i class="fa fa-envelope"></i>
-                </a>
-            </div>
+  <!-- 页脚 -->
+  <footer class="bg-white border-t border-neutral-200 py-6 mt-auto">
+    <div class="container mx-auto px-4 text-center text-neutral-500 text-sm">
+      <p>© 2025 七七福导航 - 精选实用网站导航</p>
+      <p class="mt-2">本站仅提供网址导航服务，不代表本站观点</p>
+      
+      <!-- 友情链接 -->
+      <div class="mt-4 pt-4 border-t border-neutral-200">
+        <p class="font-medium mb-2">友情链接</p>
+        <div class="flex justify-center items-center flex-wrap gap-4">
+          <a href="http://qiqifu.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline transition-colors">七七福宠物鲜食</a>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // 预置30个导航站点数据
-        const defaultWebsites = [
-            // 搜索引擎
-            { id: 1, name: '七七福宠物鲜食', url: 'http://qiqifu.com', category: '搜索引擎', icon: 'http://www.qiqifu.com/favicon.ico' },
-            { id: 2, name: 'Bing', url: 'https://bing.com', category: '搜索引擎', icon: 'https://www.bing.com/favicon.ico' },
-            { id: 3, name: 'Yahoo', url: 'https://yahoo.com', category: '搜索引擎', icon: 'https://www.yahoo.com/favicon.ico' },
-            { id: 4, name: 'DuckDuckGo', url: 'https://duckduckgo.com', category: '搜索引擎', icon: 'https://duckduckgo.com/favicon.ico' },
-            { id: 5, name: '百度', url: 'https://baidu.com', category: '搜索引擎', icon: 'https://www.baidu.com/favicon.ico' },
-            
-            // 社交媒体
-            { id: 6, name: 'Facebook', url: 'https://facebook.com', category: '社交媒体', icon: 'https://www.facebook.com/favicon.ico' },
-            { id: 7, name: 'Twitter', url: 'https://twitter.com', category: '社交媒体', icon: 'https://twitter.com/favicon.ico' },
-            { id: 8, name: 'Instagram', url: 'https://instagram.com', category: '社交媒体', icon: 'https://www.instagram.com/favicon.ico' },
-            { id: 9, name: 'LinkedIn', url: 'https://linkedin.com', category: '社交媒体', icon: 'https://www.linkedin.com/favicon.ico' },
-            { id: 10, name: 'Pinterest', url: 'https://pinterest.com', category: '社交媒体', icon: 'https://www.pinterest.com/favicon.ico' },
-            
-            // 视频平台
-            { id: 11, name: 'YouTube', url: 'https://youtube.com', category: '视频平台', icon: 'https://www.youtube.com/favicon.ico' },
-            { id: 12, name: 'Netflix', url: 'https://netflix.com', category: '视频平台', icon: 'https://www.netflix.com/favicon.ico' },
-            { id: 13, name: 'Hulu', url: 'https://hulu.com', category: '视频平台', icon: 'https://www.hulu.com/favicon.ico' },
-            { id: 14, name: 'Disney+', url: 'https://disneyplus.com', category: '视频平台', icon: 'https://www.disneyplus.com/favicon.ico' },
-            { id: 15, name: 'Vimeo', url: 'https://vimeo.com', category: '视频平台', icon: 'https://vimeo.com/favicon.ico' },
-            
-            // 新闻资讯
-            { id: 16, name: 'CNN', url: 'https://cnn.com', category: '新闻资讯', icon: 'https://www.cnn.com/favicon.ico' },
-            { id: 17, name: 'BBC News', url: 'https://bbc.com/news', category: '新闻资讯', icon: 'https://www.bbc.com/favicon.ico' },
-            { id: 18, name: '纽约时报', url: 'https://nytimes.com', category: '新闻资讯', icon: 'https://www.nytimes.com/favicon.ico' },
-            { id: 19, name: '路透社', url: 'https://reuters.com', category: '新闻资讯', icon: 'https://www.reuters.com/favicon.ico' },
-            { id: 20, name: '美联社', url: 'https://apnews.com', category: '新闻资讯', icon: 'https://apnews.com/favicon.ico' },
-            
-            // 工具类
-            { id: 21, name: 'GitHub', url: 'https://github.com', category: '工具类', icon: 'https://github.com/favicon.ico' },
-            { id: 22, name: 'Stack Overflow', url: 'https://stackoverflow.com', category: '工具类', icon: 'https://stackoverflow.com/favicon.ico' },
-            { id: 23, name: 'Google Maps', url: 'https://maps.google.com', category: '工具类', icon: 'https://maps.google.com/favicon.ico' },
-            { id: 24, name: 'Dropbox', url: 'https://dropbox.com', category: '工具类', icon: 'https://www.dropbox.com/favicon.ico' },
-            { id: 25, name: 'Trello', url: 'https://trello.com', category: '工具类', icon: 'https://trello.com/favicon.ico' },
-            
-            // 电商平台
-            { id: 26, name: 'Amazon', url: 'https://amazon.com', category: '电商平台', icon: 'https://www.amazon.com/favicon.ico' },
-            { id: 27, name: 'eBay', url: 'https://ebay.com', category: '电商平台', icon: 'https://www.ebay.com/favicon.ico' },
-            { id: 28, name: '阿里巴巴', url: 'https://alibaba.com', category: '电商平台', icon: 'https://www.alibaba.com/favicon.ico' },
-            { id: 29, name: 'Shopify', url: 'https://shopify.com', category: '电商平台', icon: 'https://www.shopify.com/favicon.ico' },
-            { id: 30, name: 'Etsy', url: 'https://etsy.com', category: '电商平台', icon: 'https://www.etsy.com/favicon.ico' }
-        ];
-
-        // 初始化数据 - 从本地存储获取，若无则使用默认数据
-        function initData() {
-            try {
-                const savedWebsites = localStorage.getItem('websites');
-                if (!savedWebsites) {
-                    localStorage.setItem('websites', JSON.stringify(defaultWebsites));
-                }
-            } catch (e) {
-                console.error('初始化本地存储失败:', e);
-                // 可以在这里添加用户提示
-            }
-        }
-
-        // 获取所有网站数据
-        function getWebsites() {
-            try {
-                return JSON.parse(localStorage.getItem('websites') || JSON.stringify(defaultWebsites));
-            } catch (e) {
-                console.error('获取网站数据失败:', e);
-                return defaultWebsites; // 失败时返回默认数据
-            }
-        }
-
-        // 获取所有分类
-        function getCategories() {
-            const websites = getWebsites();
-            const categories = ['全部网站', ...new Set(websites.map(website => website.category))];
-            return categories;
-        }
-
-        // 渲染分类列表
-        function renderCategories() {
-            const categoryList = document.getElementById('category-list');
-            if (!categoryList) return;
-            
-            const categories = getCategories();
-            categoryList.innerHTML = '';
-            
-            categories.forEach(category => {
-                const categoryItem = document.createElement('div');
-                categoryItem.className = `sidebar-item ${category === '全部网站' ? 'sidebar-item-active' : 'hover:bg-gray-100'}`;
-                categoryItem.innerHTML = `
-                    <i class="fa ${getCategoryIcon(category)} w-5 text-center"></i>
-                    <span>${category}</span>
-                `;
-                categoryItem.addEventListener('click', () => {
-                    filterByCategory(category);
-                    // 更新活跃状态
-                    document.querySelectorAll('.sidebar-item').forEach(item => {
-                        item.classList.remove('sidebar-item-active');
-                        item.classList.add('hover:bg-gray-100');
-                    });
-                    categoryItem.classList.add('sidebar-item-active');
-                    categoryItem.classList.remove('hover:bg-gray-100');
-                    
-                    // 在移动设备上点击分类后关闭侧边栏
-                    if (window.innerWidth < 1024) {
-                        toggleSidebar();
-                    }
-                });
-                categoryList.appendChild(categoryItem);
-            });
-        }
-
-        // 根据分类获取对应的图标
-        function getCategoryIcon(category) {
-            const icons = {
-                '全部网站': 'fa-th',
-                '搜索引擎': 'fa-search',
-                '社交媒体': 'fa-users',
-                '视频平台': 'fa-play-circle',
-                '新闻资讯': 'fa-newspaper-o',
-                '工具类': 'fa-wrench',
-                '电商平台': 'fa-shopping-cart'
-            };
-            return icons[category] || 'fa-globe';
-        }
-
-        // 根据分类筛选网站
-        function filterByCategory(category) {
-            const websites = getWebsites();
-            const filteredWebsites = category === '全部网站' 
-                ? websites 
-                : websites.filter(website => website.category === category);
-            
-            const categoryTitle = document.getElementById('current-category');
-            if (categoryTitle) {
-                categoryTitle.textContent = category;
-            }
-            renderWebsites(filteredWebsites);
-        }
-
-        // 渲染网站列表
-        function renderWebsites(websites) {
-            const websitesGrid = document.getElementById('websites-grid');
-            if (!websitesGrid) return;
-            
-            websitesGrid.innerHTML = '';
-            
-            if (websites.length === 0) {
-                websitesGrid.innerHTML = `
-                    <div class="col-span-full py-12 text-center">
-                        <i class="fa fa-frown-o text-4xl text-gray-300 mb-3"></i>
-                        <p class="text-gray-500">没有找到符合条件的网站</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            websites.forEach(website => {
-                const websiteCard = document.createElement('div');
-                websiteCard.className = 'bg-white rounded-xl shadow-sm overflow-hidden card-hover border border-gray-100';
-                // 验证URL是否有效
-                let url = website.url;
-                if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                    url = 'https://' + url;
-                }
-                
-                websiteCard.innerHTML = `
-                    <a href="${url}" target="_blank" rel="noopener noreferrer" class="block h-full">
-                        <div class="p-4 flex flex-col items-center justify-center text-center h-full">
-                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3 overflow-hidden">
-                                <img src="${website.icon}" alt="${website.name}图标" class="w-full h-full object-contain p-1" 
-                                    onerror="this.src='https://picsum.photos/48/48?random=${website.id}'">
-                            </div>
-                            <h3 class="font-medium text-gray-800 line-clamp-1">${website.name}</h3>
-                            <p class="text-xs text-gray-500 mt-1 line-clamp-1">${new URL(url).hostname}</p>
-                        </div>
-                    </a>
-                `;
-                websitesGrid.appendChild(websiteCard);
-            });
-        }
-
-        // 执行搜索
-        function performSearch(searchTerm) {
-            const websites = getWebsites();
-            const filteredWebsites = websites.filter(website => 
-                website.name.toLowerCase().includes(searchTerm) || 
-                website.url.toLowerCase().includes(searchTerm) ||
-                website.category.toLowerCase().includes(searchTerm)
-            );
-            renderWebsites(filteredWebsites);
-            
-            const categoryTitle = document.getElementById('current-category');
-            if (categoryTitle) {
-                categoryTitle.textContent = searchTerm ? `搜索结果: "${searchTerm}"` : '全部网站';
-            }
-        }
-
-        // 切换侧边栏（仅在移动设备上有效）
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            
-            if (sidebar && overlay) {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-                document.body.classList.toggle('overflow-hidden');
-            }
-        }
-
-        // 页面滚动时改变顶部导航样式
-        window.addEventListener('scroll', () => {
-            const topNav = document.getElementById('top-nav');
-            if (topNav) {
-                if (window.scrollY > 10) {
-                    topNav.classList.add('shadow');
-                    topNav.classList.remove('shadow-sm');
-                } else {
-                    topNav.classList.remove('shadow');
-                    topNav.classList.add('shadow-sm');
-                }
-            }
+  <!-- 分类切换和侧边栏交互脚本 -->
+  <script>
+    // 侧边栏切换
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    
+    sidebarToggle.addEventListener('click', () => {
+      if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+        mainContent.classList.remove('ml-0');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        mainContent.classList.add('ml-0');
+      }
+    });
+    
+    // 初始化移动端侧边栏状态
+    if (window.innerWidth < 1024) {
+      sidebar.classList.add('-translate-x-full');
+      mainContent.classList.add('ml-0');
+    }
+    
+    // 分类切换功能
+    const categoryLinks = document.querySelectorAll('nav a[data-category]');
+    const categorySections = document.querySelectorAll('.category-section');
+    
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // 更新活跃状态
+        categoryLinks.forEach(l => l.classList.remove('sidebar-item-active'));
+        link.classList.add('sidebar-item-active');
+        
+        const targetCategory = link.getAttribute('data-category');
+        
+        // 显示/隐藏对应分类
+        categorySections.forEach(section => {
+          if (targetCategory === 'all' || section.getAttribute('data-category') === targetCategory) {
+            section.classList.remove('category-hidden');
+          } else {
+            section.classList.add('category-hidden');
+          }
         });
-
-        // 初始化页面
-        function init() {
-            initData();
-            renderCategories();
-            filterByCategory('全部网站');
-            
-            // 绑定侧边栏切换事件
-            const sidebarToggle = document.getElementById('sidebar-toggle');
-            if (sidebarToggle) {
-                sidebarToggle.addEventListener('click', toggleSidebar);
-            }
-            
-            // 桌面端搜索功能
-            const searchInputDesktop = document.getElementById('search-input-desktop');
-            if (searchInputDesktop) {
-                searchInputDesktop.addEventListener('input', (e) => {
-                    performSearch(e.target.value.toLowerCase());
-                });
-            }
-            
-            // 移动端搜索功能
-            const searchInputMobile = document.getElementById('search-input-mobile');
-            if (searchInputMobile) {
-                searchInputMobile.addEventListener('input', (e) => {
-                    performSearch(e.target.value.toLowerCase());
-                });
-            }
-            
-            // 移动端搜索框切换显示
-            const mobileSearchToggle = document.getElementById('mobile-search-toggle');
-            const mobileSearchContainer = document.getElementById('mobile-search-container');
-            if (mobileSearchToggle && mobileSearchContainer) {
-                mobileSearchToggle.addEventListener('click', () => {
-                    mobileSearchContainer.classList.toggle('hidden');
-                    // 如果显示搜索框，则聚焦
-                    if (!mobileSearchContainer.classList.contains('hidden') && searchInputMobile) {
-                        searchInputMobile.focus();
-                    }
-                });
-            }
+        
+        // 在移动设备上点击后关闭侧边栏
+        if (window.innerWidth < 1024) {
+          sidebar.classList.add('-translate-x-full');
+          mainContent.classList.add('ml-0');
         }
-
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+      });
+    });
+    
+    // 滚动时改变头部样式
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 10) {
+        header.classList.add('shadow');
+      } else {
+        header.classList.remove('shadow');
+      }
+    });
+  </script>
 </body>
 </html>
